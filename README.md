@@ -51,7 +51,7 @@ The yt home page doesn't load properly/the yt home page's elements don't load pr
 
 * add an OLED theme.
 
-* add the option to download videos, Shorts and sound....... (almost done!)
+* add the option to download videos, Shorts and sound....... (✅)
 
 * Fixing whatever other issues might come down the road!
 
