@@ -23,7 +23,9 @@ YouPiP;
 
 An adblocker dylib to get rid of the annoying ads!  
 
-Download Manager (NEW)
+Download Manager;
+
+YouCast (NEW)
 
 Video overlay.
 
@@ -47,7 +49,7 @@ The yt home page doesn't load properly/the yt home page's elements don't load pr
 
 * Adding smth VERY COOL with future releses........
 
-* Making a tweak named YouCast, that is going to fix casting!
+* Making a tweak named YouCast, that is going to fix casting!(✅)
 
 * add an OLED theme.
 
