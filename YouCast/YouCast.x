@@ -293,7 +293,7 @@ nativeBtn.hidden = NO;
     nativeBtn.alpha = 1.0;
     [controlsContainer bringSubviewToFront:nativeBtn];
     
-    // --- 5. Hide native button (alpha only — keep in layout for positioning) ---
+    // --- 5. Crucial part for custom button to properly show up ---
     customBtn.hidden = NO;
     customBtn.alpha = 1.0;
     [controlsContainer bringSubviewToFront:customBtn];
