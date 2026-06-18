@@ -8,34 +8,66 @@ It was very hard to build, but I do all this work for everyone!
 # WHEN U FIRST OPEN THE MOD RESTART IT RIGHT AWAY SO IT SHOWS THE RIGHT UI, WHEN U FIRST LAUNCH IT IT SHOWS THE OLD YT UI. THIS ACTION MUST BE DONE ONLY ONCE!
 
 # Implemented tweaks:
+<details>
+  <summary>A/B;</summary>
+  A/B is developed by PoomSmar). This tweak can enable multiple experimental settings for the YouTube app.
+</details>
 
-A/B;
+<details>
+<summary>YTweaks;</summary>
+  This tweak is developed by fosterbarnes. This tweak has multipkle features for youtube, such as Night Mode.
+</details>
 
-YTweaks;
+<details>
+  <summary>DontEatMyContent;</summary>
+  This tweak is developed by therealFoxter. This tweak is made to prevent the notch/dynamic island for munching into 2:1 videos.
+</details>
 
-DontEatMyContent;
+<details>
+<summary>Return Youtube Dislike;</summary>
+  This tweak is developed by PoomSmart. This tweak brings back dislikes on the YT app.
+</details>
 
-Return Youtube Dislike;
+<details>
+<summary>YTUHD;</summary>
+  This tweak is developed by PoomSmart. This tweak unlocks 2K and 4K resolutions in videos for iPhones with the processor older than A12.
+</details>
 
-YTUHD;
+<details>
+<summary>YouPiP;</summary>
+This tweak is developed by PoomSmart. this tweak enabled native PiP to the Youtube app.
+</details> 
 
-YouPiP;
+<details>
+<summary>Download Manager (YouDownload)</summary>
+This tweak is developed by me and it is an download manager for downloading videos!
+</details>
 
-An adblocker dylib to get rid of the annoying ads!  
-
-Download Manager;
+An adblocker dylib to get rid of the annoying ads! 
 
 Video overlay.
 
 # The additional tweaks added in video overlay:
 
-YouGetCaption;
+<details>
+<summary>YouGetCaption;</summary>
+This tweak is developed by PoomSmart. This tweak is made for faster copying of video captions.
+</details>
 
-YouQuality;
+<details>
+<summary>YouQuality;</summary>
+This tweak is developed by poomSmrt. This tweak is for Viewing/changing video quality on iOS YouTube app faster.
+</details>
 
-YouShare;
+<details>
+<summary>YouShare;</summary>
+This tweak is developed by aricloverEXTRA. This tweak is for having the ability to copy the Youtube video URL easier in the video overlay
+</details>
 
-YouSpeed.
+<details>
+<summary>YouSpeed.</summary>
+This tweak is developed by PoomSmart. This tweak is for viewing, changing and adding video speed options in the video overlay
+</details>
 
 # Current ongoing Issues:
 
