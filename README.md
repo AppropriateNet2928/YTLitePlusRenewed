@@ -10,12 +10,12 @@ It was very hard to build, but I do all this work for everyone!
 # Implemented tweaks:
 <details>
   <summary>A/B;</summary>
-  A/B is developed by PoomSmar). This tweak can enable multiple experimental settings for the YouTube app.
+  A/B is developed by PoomSmart. This tweak can enable multiple experimental settings for the YouTube app.
 </details>
 
 <details>
 <summary>YTweaks;</summary>
-  This tweak is developed by fosterbarnes. This tweak has multipkle features for youtube, such as Night Mode.
+  This tweak is developed by fosterbarnes. This tweak has multiple features for Youtube, such as Night Mode.
 </details>
 
 <details>
@@ -30,17 +30,17 @@ It was very hard to build, but I do all this work for everyone!
 
 <details>
 <summary>YTUHD;</summary>
-  This tweak is developed by PoomSmart. This tweak unlocks 2K and 4K resolutions in videos for iPhones with the processor older than A12.
+  This tweak is developed by PoomSmart. This tweak unlocks 2K and 4K resolutions in videos for iPhones with an older processor than A12.
 </details>
 
 <details>
 <summary>YouPiP;</summary>
-This tweak is developed by PoomSmart. this tweak enabled native PiP to the Youtube app.
+This tweak is developed by PoomSmart. This tweak enables native PiP to the Youtube app.
 </details> 
 
 <details>
 <summary>Download Manager (YouDownload)</summary>
-This tweak is developed by me and it is an download manager for downloading videos!
+This tweak is developed by me and it is an download manager for downloading videos
 </details>
 
 An adblocker dylib to get rid of the annoying ads! 
@@ -56,7 +56,7 @@ This tweak is developed by PoomSmart. This tweak is made for faster copying of v
 
 <details>
 <summary>YouQuality;</summary>
-This tweak is developed by poomSmrt. This tweak is for Viewing/changing video quality on iOS YouTube app faster.
+This tweak is developed by poomSmrt. This tweak is for viewing/changing video quality on iOS YouTube app faster.
 </details>
 
 <details>
