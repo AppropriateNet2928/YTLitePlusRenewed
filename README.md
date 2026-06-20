@@ -95,7 +95,7 @@ This tweak is developed by PoomSmart. This tweak is for viewing, changing and ad
 </details>
 
 # Current ongoing Issues:
-There are no current ongoing issues at the moment.
+This mod can't be installed using SideStore and it's not my fault. 
 
 # TO DO LIST:
 
