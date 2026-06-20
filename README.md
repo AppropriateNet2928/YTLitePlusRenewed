@@ -125,6 +125,6 @@ Special thanks to PoomSmart, dayanch96 and all the devs who created the tweaks i
 Special thanks to daisuke1227 for the download manager!
 
 
-Special thabks to Mark02-2012!
+Special thanks to Mark02-2012!
 
 
