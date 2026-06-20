@@ -9,34 +9,54 @@ It was very hard to build, but I do all this work for everyone!
 
 # Implemented tweaks:
 <details>
-  <summary>A/B;</summary>
+  <summary>A/B</summary>
   A/B is developed by PoomSmart. This tweak can enable multiple experimental settings for the YouTube app.
 </details>
 
 <details>
-<summary>YTweaks;</summary>
+<summary>YTweaks</summary>
   This tweak is developed by fosterbarnes. This tweak has multiple features for Youtube, such as Night Mode.
 </details>
 
 <details>
-  <summary>DontEatMyContent;</summary>
+  <summary>DontEatMyContent</summary>
   This tweak is developed by therealFoxter. This tweak is made to prevent the notch/dynamic island for munching into 2:1 videos.
 </details>
 
 <details>
-<summary>Return Youtube Dislike;</summary>
+<summary>Return Youtube Dislike</summary>
   This tweak is developed by PoomSmart. This tweak brings back dislikes on the YT app.
 </details>
 
 <details>
-<summary>YTUHD;</summary>
+<summary>YTUHD</summary>
   This tweak is developed by PoomSmart. This tweak unlocks 2K and 4K resolutions in videos for iPhones with an older processor than A12.
 </details>
 
 <details>
-<summary>YouPiP;</summary>
+<summary>YouPiP</summary>
 This tweak is developed by PoomSmart. This tweak enables native PiP to the Youtube app.
 </details> 
+
+<details>
+  <summary>PleaseDontStopTheMusic</summary>
+  This tweak is developed by mike802. This tweak is from preventing apps like Roblox from pausing your background music.
+</details>
+
+<details>
+  <summary>YTLIte 5.2.1 crack</summary>
+  The YTLite 5.2.1 crack is cracked by Zarzel (shinewake).YTLite is made by dayanch96, eaturing over 100+ customization options.
+</details>
+
+<details>
+  <summary>YouChooseQuality</summary>
+  This tweak is made by PomSmart. This tweak is for auto-selecting the video quality of your choice in the iOS Youtube app.
+</details>
+
+<details>
+  <summary>Gonerino</summary>
+  This tweak is made by castdrian. This tweak is for removing videos uploaded by specific channels.
+</details>
 
 An adblocker dylib to get rid of the annoying ads! 
 
@@ -45,30 +65,36 @@ Video overlay.
 # The additional tweaks added in video overlay:
 
 <details>
-<summary>YouGetCaption;</summary>
+<summary>YouGetCaption</summary>
 This tweak is developed by PoomSmart. This tweak is made for faster copying of video captions.
 </details>
 
 <details>
-<summary>YouQuality;</summary>
+<summary>YouQuality</summary>
 This tweak is developed by poomSmrt. This tweak is for viewing/changing video quality on iOS YouTube app faster.
 </details>
 
 <details>
-<summary>YouShare;</summary>
+<summary>YouShare</summary>
 This tweak is developed by aricloverEXTRA. This tweak is for having the ability to copy the Youtube video URL easier in the video overlay
 </details>
 
 <details>
-<summary>YouSpeed.</summary>
+<summary>YouSpeed</summary>
 This tweak is developed by PoomSmart. This tweak is for viewing, changing and adding video speed options in the video overlay
 </details>
 
+<details>
+  <summary>YouLoop</summary>
+  This tweak is developed by bhackel. This tweak is for looping Youtube videos.
+</details>
+
+<details>
+  <summary>YouMute</summary>
+  This tweak is developed by PoomSmart. This tweak is for muting/unmuting Youtube videos faster.
+</details>
 # Current ongoing Issues:
-
-Hold to speed in Shorts will result in a crash;
-
-The yt home page doesn't load properly/the yt home page's elements don't load properly.
+There are no current ongoing issues at the moment.
 
 # TO DO LIST:
 
@@ -76,9 +102,9 @@ The yt home page doesn't load properly/the yt home page's elements don't load pr
 
 * Making a tweak named YouCast, that is going to fix casting!(❌)
 
-* add an OLED theme.
+* add an OLED theme.(✅)
 
-* add the option to download videos, Shorts and sound....... (✅/❌)
+* add the option to download videos, Shorts and sound....... (✅)
 
 * Fixing whatever other issues might come down the road!
 
@@ -98,6 +124,6 @@ Special thanks to PoomSmart, dayanch96 and all the devs who created the tweaks i
 Special thanks to daisuke1227 for the download manager!
 
 
-
+Special thabks to Mark02-2012!
 
 
