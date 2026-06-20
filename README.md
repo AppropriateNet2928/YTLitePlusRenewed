@@ -93,6 +93,7 @@ This tweak is developed by PoomSmart. This tweak is for viewing, changing and ad
   <summary>YouMute</summary>
   This tweak is developed by PoomSmart. This tweak is for muting/unmuting Youtube videos faster.
 </details>
+
 # Current ongoing Issues:
 There are no current ongoing issues at the moment.
 
