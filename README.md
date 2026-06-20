@@ -38,11 +38,6 @@ It was very hard to build, but I do all this work for everyone!
 This tweak is developed by PoomSmart. This tweak enables native PiP to the Youtube app.
 </details> 
 
-<details>
-<summary>Download Manager (YouDownload)</summary>
-This tweak is developed by me and it is an download manager for downloading videos
-</details>
-
 An adblocker dylib to get rid of the annoying ads! 
 
 Video overlay.
