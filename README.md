@@ -4,9 +4,9 @@ A very nice iOS Youtube tweak, that brings many useful youtube tweaks to the You
 
 It was very hard to build, but I do all this work for everyone!
 
-
-# WHEN U FIRST OPEN THE MOD RESTART IT RIGHT AWAY SO IT SHOWS THE RIGHT UI, WHEN U FIRST LAUNCH IT IT SHOWS THE OLD YT UI. THIS ACTION MUST BE DONE ONLY ONCE!
-
+> [!NOTE]
+>WHEN U FIRST OPEN THE MOD RESTART IT RIGHT AWAY SO IT SHOWS THE RIGHT UI, WHEN U FIRST LAUNCH IT IT SHOWS THE OLD YT UI. THIS ACTION MUST BE DONE ONLY ONCE!
+>
 # Implemented tweaks:
 <details>
   <summary>A/B</summary>
