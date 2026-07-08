@@ -1,0 +1,9 @@
+Package: com.local.youhideuserinterface
+Name: YouHideUserInterface
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: YouHideUserInterface tweak
+Maintainer: local
+Author: local
+Section: Tweaks
+Depends: mobilesubstrate, firmware (>= 14.0)

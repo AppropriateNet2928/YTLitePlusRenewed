@@ -1,0 +1,9 @@
+Package: com.local.youfixplaybackissues
+Name: YouFixPlaybackIssues
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Fixes the 60-second playback throttling issue on sideloaded YouTube.
+Maintainer: Developer
+Author: Developer
+Section: Tweaks
