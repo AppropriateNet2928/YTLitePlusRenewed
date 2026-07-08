@@ -58,11 +58,7 @@ This tweak is developed by PoomSmart. This tweak enables native PiP to the Youtu
   This tweak is made by castdrian. This tweak is for removing videos uploaded by specific channels.
 </details>
 
-An adblocker dylib to get rid of the annoying ads! 
-
 Video overlay.
-
-# The additional tweaks added in video overlay:
 
 <details>
 <summary>YouGetCaption</summary>
@@ -94,14 +90,22 @@ This tweak is developed by PoomSmart. This tweak is for viewing, changing and ad
   This tweak is developed by PoomSmart. This tweak is for muting/unmuting Youtube videos faster.
 </details>
 
+<details>
+  <summary>YouHideUserInterface</summary>
+  This us a tweak created by me that has the role to hide/unhide the User Interface in both shorts and Video Overlay for a cleaner UI. Especially useful on video overlay! This tweak is enabled by default with no settings at all.
+</details>
+
+<details>
+  <summary>YouFixPlaybackIssues</summary>
+  This is a tweak created by me that has the key role of fixing the playback issues that, my opinion, is the best fix at the current hour! This fix outperforms many older fixes like, for instance, it outperforms iKarwan's fin in YTKillerPlus. This tweak is enabled by default and has no settings at all.
+</details>
+
 # Current ongoing Issues:
 This mod can't be installed using SideStore and it's not my fault. 
 
 # TO DO LIST:
 
 * Adding smth VERY COOL with future releses........
-
-* Making a tweak named YouCast, that is going to fix casting!(❌)
 
 * add an OLED theme.(✅)
 
@@ -126,5 +130,7 @@ Special thanks to daisuke1227 for the download manager!
 
 
 Special thanks to Mark02-2012!
+
+Special thanks to @Tonwalter888!
 
 
