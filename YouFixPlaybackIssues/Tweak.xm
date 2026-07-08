@@ -31,7 +31,7 @@ static NSString * const kJSONKeyContinuation = @"continuation";
     headers[@"Content-Type"] = @"application/json";
     headers[@"Accept-Language"] = @"*";
     
-    // Identitate curată de Android VR (Oculus Quest) pentru a ocoli restricțiile
+    // Clean Android VR (Oculus Quest) identity to bypass playback restrictions
     headers[@"X-YouTube-Client-Name"] = @"28";
     headers[@"X-YouTube-Client-Version"] = @"1.65.10";
     headers[@"User-Agent"] = @"com.google.android.apps.youtube.vr.oculus/1.65.10 (Linux; U; Android 12L; eureka-user Build/SQ3A.220605.009.A1) gzip";
@@ -86,7 +86,7 @@ static NSString * const kJSONKeyContinuation = @"continuation";
 - (NSDictionary *)buildPayloadWithIncomingBody:(NSDictionary *)incomingBody {
     NSMutableDictionary *body = [[YTDirectPlaybackClient contextBlueprint] mutableCopy];
     
-    // Păstrăm parametrii de navigare și identificare ai clipului video din cererea originală
+    // Preserve navigation and video identification parameters from the original request
     if (incomingBody[kJSONKeyVideoId]) {
         body[kJSONKeyVideoId] = incomingBody[kJSONKeyVideoId];
     }
@@ -115,21 +115,21 @@ static NSString * const kJSONKeyContinuation = @"continuation";
     if (!self || !URL) return self;
     
     NSString *path = URL.path;
-    // Interceptăm doar endpoint-urile critice de streaming și navigare
+    // Intercept only critical streaming and navigation endpoints
     if ([path containsString:kEndpointPlayer] || [path containsString:kEndpointNext] || [path containsString:kEndpointBrowse]) {
         
-        // Atașăm headerele specifice profilului VR (fără a șterge token-ul nativ de login dacă există)
+        // Attach VR profile-specific headers (without removing native login tokens if present)
         NSDictionary *computedHeaders = [YTDirectPlaybackClient apiHeadersForVisitorData:[YTInnertubeSession sharedSession].visitorData];
         for (NSString *headerKey in computedHeaders) {
             [self setValue:computedHeaders[headerKey] forHTTPHeaderField:headerKey];
         }
         
-        // Modificăm payload-ul JSON trimis către serverele YouTube
+        // Modify the JSON payload sent to YouTube servers
         if (self.HTTPBody) {
             NSDictionary *incomingJSON = [NSJSONSerialization JSONObjectWithData:self.HTTPBody options:0 error:nil];
             if ([incomingJSON isKindOfClass:[NSDictionary class]]) {
                 
-                // Extragem visitorData trimis de YouTube pentru a menține sesiunea validă
+                // Extract visitorData sent by YouTube to maintain a valid session
                 NSDictionary *incomingContext = incomingJSON[kJSONKeyContext];
                 if ([incomingContext isKindOfClass:[NSDictionary class]]) {
                     NSDictionary *incomingClient = incomingContext[kJSONKeyClient];
@@ -138,7 +138,7 @@ static NSString * const kJSONKeyContinuation = @"continuation";
                     }
                 }
                 
-                // Reconstruim corpul cererii conform arhitecturii Android VR
+                // Reconstruct the request body according to the Android VR architecture
                 NSDictionary *mutatedJSON = [[YTInnertubeSession sharedSession] buildPayloadWithIncomingBody:incomingJSON];
                 NSData *mutatedData = [NSJSONSerialization dataWithJSONObject:mutatedJSON options:0 error:nil];
                 if (mutatedData) {
