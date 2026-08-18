@@ -69,6 +69,11 @@ This tweak is developed by PoomSmart. This tweak enables native PiP to the Youtu
 </details>
 
 <details>
+  <summary>YouGroupSettings</summary>
+  YouGroupSettings is made by PoomSmart and it has the role to allow custom settings (made by tweaks) to be displayed in the Youtube settings panel under a custom section named "Tweaks". More info can be found at the tweak's repo link: https://github.com/PoomSmart/YouGroupSettings (This tweak was always on the mod, I just forgot to add it here, so now that's exactly what I did, sry).
+</details>
+
+<details>
 <summary>YouGetCaption</summary>
 This tweak is developed by PoomSmart. This tweak is made for faster copying of video captions.
 </details>
