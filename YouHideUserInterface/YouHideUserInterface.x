@@ -2,6 +2,14 @@
 #import <objc/runtime.h>
 #import <YouTubeHeader/YTMainAppVideoPlayerOverlayView.h>
 #import <YouTubeHeader/YTReelWatchPlaybackOverlayView.h>
+#import <YTScript/YTScriptRuntime.h>
+
+// This right here is YTScript logic, and YES I am not joking, this will be actual codfer upon compilation
+YT_PAGE(@"YouHideUserInterface");
+YT_TOGGLE(@"YouHideUserInterface", @"This is a feature for hiding the User Interface in both Shorts and Video Overlay. App restart is required", YES);
+YT_SLIDER(@"Visibility", 1, 10, 1, @"This is a slider to set the eye to be less or more visible in both Shorts and Video Overlay. App restart is required");
+
+YT_ON(YouHideUserInterface)
 
 @interface YTReelPlayerViewController : UIViewController
 @end
@@ -49,6 +57,12 @@ static NSInteger const YouHideUIEyeButtonTag = 99999;
 }
 @end
 
+static CGFloat YouHideUI_GetEyeButtonOpacity() {
+    id val = [[NSUserDefaults standardUserDefaults] objectForKey:@"Visibility"];
+    float opacity = val ? [val floatValue] : 1.0; // 1-10, default is 1 (0.1 opacity)
+    return opacity / 10.0;
+}
+
 static void YouHideUIUpdateEyeButton(UIButton *button) {
     if (!button) return;
 
@@ -60,7 +74,7 @@ static void YouHideUIUpdateEyeButton(UIButton *button) {
     }
     [button setImage:image forState:UIControlStateNormal];
     button.hidden = NO;
-    button.alpha = 1.0;
+    button.alpha = YouHideUI_GetEyeButtonOpacity();
     button.userInteractionEnabled = YES;
     [button.superview bringSubviewToFront:button];
 }
@@ -146,7 +160,7 @@ static void YouHideUIApplyControlHiding(UIView *root, BOOL hidden) {
     for (UIView *subview in root.subviews) {
         if (YouHideUIIsEyeButton(subview)) {
             subview.hidden = NO;
-            subview.alpha = 1.0;
+            subview.alpha = YouHideUI_GetEyeButtonOpacity();
             subview.userInteractionEnabled = YES;
             continue;
         }
@@ -266,7 +280,7 @@ static void YouHideUIPostToggleNotification(void) {
     for (UIView *subview in self.subviews) {
         if (YouHideUIIsEyeButton(subview)) {
             subview.hidden = NO;
-            subview.alpha = 1.0;
+            subview.alpha = YouHideUI_GetEyeButtonOpacity();
             subview.userInteractionEnabled = YES;
             continue;
         }
@@ -393,3 +407,5 @@ static void YouHideUIPostToggleNotification(void) {
 }
 
 %end
+
+YT_END
