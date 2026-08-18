@@ -4,7 +4,7 @@
 #import <YouTubeHeader/YTReelWatchPlaybackOverlayView.h>
 #import <YTScript/YTScriptRuntime.h>
 
-// This right here is YTScript logic, and YES I am not joking, this will be actual codfer upon compilation
+// This right here is YTScript logic, and YES I am not joking, this will be actual code upon compilation
 YT_PAGE(@"YouHideUserInterface");
 YT_TOGGLE(@"YouHideUserInterface", @"This is a feature for hiding the User Interface in both Shorts and Video Overlay. App restart is required", YES);
 YT_SLIDER(@"Visibility", 1, 10, 1, @"This is a slider to set the eye to be less or more visible in both Shorts and Video Overlay. App restart is required");
