@@ -1,0 +1,9 @@
+Package: com.local.ytdownloadmanager
+Name: YTDownloadManager
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: YoTDownloadManager tweak
+Maintainer: local
+Author: local
+Section: Tweaks
+Depends: mobilesubstrate, firmware (>= 14.0)
