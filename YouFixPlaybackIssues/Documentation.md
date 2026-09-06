@@ -15,12 +15,12 @@ Well the "request" goes through a few multiple steps, which is more of a "route"
 
 The "request's route" would be, conceptually:
 
-1) NSMutableRequest/NSRequest -> NSURLSession:
+1) NSMutableURLRequest/NSURLRequest -> NSURLSession:
 
 Here is where the request is in the earliest state: It is made and given to NSURLSession to get it prepped and send it. This is the earliest point possible I think where u can modify
 the request in order to send the request u modified to have ur custom headers, like my tweak does. The request is most likely JSON.
 
-2) NSURLSessionDataTask/NSURLSessionTask -> GTMSessionFetcher (probably):
+2) NSURLSession -> NSURLSessionDataTask/NSURLSessionTask -> GTMSessionFetcher (probably):
 
 This is the point where the request was made and sent forward; The point where u will be once able to modify it comes next. Here u can't modify it I THINK bc the request is processing
 in order to be sent forward;
