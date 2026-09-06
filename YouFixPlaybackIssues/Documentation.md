@@ -7,7 +7,7 @@ my tweak, YouFixPlaybackIssues
 This request is, for example, like u would make a request to get what u need in return. In this case, for example, requests regarding the /browse endpoint with request headers and etc
 in order to get back from Google's servers I think things like browseID, continuation etc.
 
-This kind of "request" has more steps that it goes through ion the Youtube application before it gets to the server:
+This kind of "request" has more steps that it goes through in the Youtube application before it gets to the server:
 
 # What are the steps that a request can go through?
 
@@ -27,7 +27,7 @@ in order to be sent forward;
 
 3) GTMSessionFetcher -> GTMSessionFetcherSessionDelegateDispatcher (most likely):
 
-Here is the point where u can modify the request once more; This class is most likely boring open the request, checking its contents to make sure the request is right and it has all
+Here is the point where u can modify the request once more; This class is most likely tearing open the request, checking its contents to make sure the request is right and it has all
 the headers and it may rewrite it to protobuf or modify it:
 
 This class and GTMSessionFetcherSessionDelegateDispatcher most likely have a built in protobuf parser/decoder/parser etc and can modify the requests. This is most likely a security patch
@@ -46,7 +46,7 @@ If u force the Content-type to be sth else than application/x-protobuf (the erro
 }
 ```
 
-See the error? It says it expects a VALUE than text that, is MOST LIKELY binary protobuf, further proving my point :))
+See the error? It says it expects a VALUE then text that, is MOST LIKELY binary protobuf, further proving my point :))
 
 4) GTMSessionFetcherSessionDelegateDispatcher -> Google's servers
 
@@ -56,10 +56,6 @@ This is the step where the dispatcher makes the last check on the request, ALSO 
 # What would be the conclusion?
 
 Well the conclusion would be that this THEORY may have points where it is correct or have points where it's wrong and I only present this as a theory, not as a factual truth. This may
-get more documentation over time as this behavior will most likely analyses better.
+get more documentation over time as this behavior will most likely be analyzed better.
 
-
-
-
-
-
+And also, the conclusion may be that a request goes through multiple steps where there are modification points to modify the request; in this case to REPLACE the headers the etc with what u tell it to replace it and it is automatically written in protobuf and stuff, explaining why if u put content type as application/x-protobuf BUT u are using NSJSONSerialization, the request is STILL modified correctly thanks to those GTM classes.
