@@ -34,7 +34,7 @@ This class and GTMSessionFetcherSessionDelegateDispatcher most likely have a bui
 made by Google in YouTube to prevent god knows what. Now this class has methods that allow us to tell these two classes that we want to eliminate the headers in the original request and
 replace them with the headers we give it. These two classes can automatically do it thanks to the possible capability to write directly in x-protobuf.
 
-If u force the Content-type to be sth else than application/x-protobuf, u get error 400 Bad Request, with the response body being:
+If u force the Content-type to be sth else than application/x-protobuf (the error is for when the content type is application/json or application/protobuf+json [ProtoJSON], u get error 400 Bad Request, with the response body being:
 
 ```json
 {
@@ -50,7 +50,7 @@ See the error? It says it expects a VALUE than text that, is MOST LIKELY binary 
 
 4) GTMSessionFetcherSessionDelegateDispatcher -> Google's servers
 
-This is the step where the dispatcher makes the last check on the request, ALSOP having the ability to modify it, and redirects it/sends it to Google's servers.
+This is the step where the dispatcher makes the last check on the request, ALSO having the ability to modify it, and redirects it/sends it to Google's servers.
 
 
 # What would be the conclusion?
