@@ -3,6 +3,11 @@
 #import <AVKit/AVKit.h>
 #import <Photos/Photos.h>
 #import <objc/runtime.h>
+#import <objc/message.h>
+#import <YouTubeHeader/YTIcon.h>
+#import "YTDMDownloadsManager.h"
+#import "YTDMDownloadsViewController.h"
+#import "YTDMPlayerViewController.h"
 
 static char kAssociatedOutURLKey;
 static NSString *capturedVideoId = nil;
@@ -4427,8 +4432,494 @@ forRowAtIndexPath:
 @end
 
 // ============================================================================
-// STABLE VIDEO ID CAPTURE
+// DOWNLOADS TAB
+//
+// Injects a pivot bar item that opens YTDMDownloadsViewController.
+// Items are built with the same YTIPivotBarRenderer factory call the native
+// tab bar uses, and the hosting browse controller adopts the downloads
+// controller as a child, so YouTube owns navigation and we only supply
+// content.
 // ============================================================================
+
+static NSString * const YTDMPivotIdentifier = @"FEYTDMDownloads";
+static NSString * const YTDMPivotTitle = @"Downloads";
+static const void *YTDMDownloadsAssociation = &YTDMDownloadsAssociation;
+static IMP YTDMPreviousSetPivotRenderer;
+// Original implementations are kept in a plain C table keyed by class and
+// selector name. Associated objects cannot hold them: a Class is not an ObjC
+// object type under ARC, and bridging an IMP to id is rejected outright.
+static NSMutableDictionary<NSString *, NSValue *> *YTDMPreviousIMPs(void) {
+    static NSMutableDictionary<NSString *, NSValue *> *table;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        table = [NSMutableDictionary dictionary];
+    });
+    return table;
+}
+
+static NSString *YTDMOriginalKey(Class cls, SEL selector) {
+    return [NSString stringWithFormat:@"YTDM.original.%@.%@",
+            NSStringFromClass(cls),
+            NSStringFromSelector(selector)];
+}
+
+// Installs a replacement using class_addMethod first, so an inherited
+// viewDidLoad is shadowed on the subclass instead of being overwritten on
+// whichever class actually declares it. Overwriting a superclass
+// implementation with a function that assumes the subclass layout is what
+// makes the replacement run against the wrong self.
+static void YTDMInstallInstanceHook(Class cls,
+                                    SEL selector,
+                                    IMP replacement) {
+    if (cls == Nil ||
+        selector == NULL ||
+        replacement == NULL) {
+        return;
+    }
+
+    Method method = class_getInstanceMethod(cls, selector);
+    if (method == NULL) {
+        return;
+    }
+
+    // If this class is already hooked, the captured original is stored and
+    // swapping the implementation again is safe. Otherwise the method we
+    // just read is our own replacement and must never be captured.
+    NSString *key = YTDMOriginalKey(cls, selector);
+    if (YTDMPreviousIMPs()[key] != nil) {
+        method_setImplementation(
+            class_getInstanceMethod(cls, selector),
+            replacement);
+        return;
+    }
+
+    const char *types = method_getTypeEncoding(method);
+    IMP original = method_getImplementation(method);
+
+    if (!class_addMethod(cls,
+                         selector,
+                         replacement,
+                         types)) {
+        method_setImplementation(
+            class_getInstanceMethod(cls, selector),
+            replacement);
+    }
+
+    @synchronized (YTDMPreviousIMPs()) {
+        YTDMPreviousIMPs()[key] =
+            [NSValue valueWithPointer:(const void *)original];
+    }
+}
+
+static BOOL YTDMDownloadsTabEnabled(void) {
+    id value =
+        [[NSUserDefaults standardUserDefaults]
+            objectForKey:
+                @"YTDM_ShowDownloadsTab"];
+    return value ? [value boolValue] : YES;
+}
+
+static id YTDMHookedValue(id receiver, NSString *selectorName) {
+    SEL selector = NSSelectorFromString(selectorName);
+    if (receiver == nil || ![receiver respondsToSelector:selector]) {
+        return nil;
+    }
+    return ((id (*)(id, SEL))objc_msgSend)(receiver, selector);
+}
+
+static void YTDMHookedSetValue(id receiver,
+                               NSString *selectorName,
+                               id value) {
+    SEL selector = NSSelectorFromString(selectorName);
+    if (receiver == nil || ![receiver respondsToSelector:selector]) {
+        return;
+    }
+    ((void (*)(id, SEL, id))objc_msgSend)(receiver, selector, value);
+}
+
+static id YTDMHookedNew(NSString *className) {
+    Class cls = NSClassFromString(className);
+    return cls == Nil ? nil : [[cls alloc] init];
+}
+
+static id YTDMMakePivotItem(void) {
+
+    Class rendererClass =
+        NSClassFromString(@"YTIPivotBarRenderer");
+
+    SEL factory =
+        NSSelectorFromString(
+            @"pivotSupportedRenderersWithBrowseId:title:iconType:");
+
+    if (rendererClass != Nil &&
+        [rendererClass respondsToSelector:factory]) {
+
+        id renderer =
+            ((id (*)(id, SEL, id, id, NSInteger))objc_msgSend)(
+                rendererClass,
+                factory,
+                YTDMPivotIdentifier,
+                YTDMPivotTitle,
+                (NSInteger)YT_TAB_LIBRARY);
+
+        id item =
+            YTDMHookedValue(renderer,
+                            @"pivotBarItemRenderer");
+
+        if (item != nil) {
+            YTDMHookedSetValue(item,
+                               @"setPivotIdentifier:",
+                               YTDMPivotIdentifier);
+        }
+
+        if (renderer != nil) {
+            return renderer;
+        }
+    }
+
+    id browseEndpoint =
+        YTDMHookedNew(@"YTIBrowseEndpoint");
+    id command =
+        YTDMHookedNew(@"YTICommand");
+    id itemRenderer =
+        YTDMHookedNew(@"YTIPivotBarItemRenderer");
+    id supportedRenderer =
+        YTDMHookedNew(@"YTIPivotBarSupportedRenderers");
+    Class formattedClass =
+        NSClassFromString(@"YTIFormattedString");
+    SEL formattedSelector =
+        NSSelectorFromString(@"formattedStringWithString:");
+
+    if (browseEndpoint == nil ||
+        command == nil ||
+        itemRenderer == nil ||
+        supportedRenderer == nil ||
+        formattedClass == Nil ||
+        ![formattedClass respondsToSelector:formattedSelector]) {
+        return nil;
+    }
+
+    YTDMHookedSetValue(browseEndpoint,
+                       @"setBrowseId:",
+                       YTDMPivotIdentifier);
+    YTDMHookedSetValue(command,
+                       @"setBrowseEndpoint:",
+                       browseEndpoint);
+    YTDMHookedSetValue(itemRenderer,
+                       @"setPivotIdentifier:",
+                       YTDMPivotIdentifier);
+    YTDMHookedSetValue(itemRenderer,
+                       @"setNavigationEndpoint:",
+                       command);
+    YTDMHookedSetValue(itemRenderer,
+                       @"setTitle:",
+                       ((id (*)(id, SEL, id))objc_msgSend)(
+                           formattedClass,
+                           formattedSelector,
+                           YTDMPivotTitle));
+
+    id icon =
+        YTDMHookedValue(itemRenderer,
+                        @"icon");
+    SEL setIconType =
+        NSSelectorFromString(@"setIconType:");
+
+    if ([icon respondsToSelector:setIconType]) {
+        ((void (*)(id, SEL, NSInteger))objc_msgSend)(
+            icon,
+            setIconType,
+            (NSInteger)YT_TAB_LIBRARY);
+    }
+
+    YTDMHookedSetValue(supportedRenderer,
+                       @"setPivotBarItemRenderer:",
+                       itemRenderer);
+
+    return supportedRenderer;
+}
+
+static NSArray *YTDMTabItems(id renderer,
+                             NSString **setterName) {
+
+    NSArray<NSString *> *getters = @[
+        @"itemsArray",
+        @"items",
+        @"pivotBarItemsArray",
+        @"pivotBarItems"
+    ];
+
+    NSArray<NSString *> *setters = @[
+        @"setItemsArray:",
+        @"setItems:",
+        @"setPivotBarItemsArray:",
+        @"setPivotBarItems:"
+    ];
+
+    for (NSUInteger index = 0;
+         index < getters.count;
+         index++) {
+
+        id value =
+            YTDMHookedValue(renderer,
+                            getters[index]);
+
+        if ([value isKindOfClass:NSArray.class]) {
+            if (setterName != NULL) {
+                *setterName = setters[index];
+            }
+            return value;
+        }
+    }
+
+    return nil;
+}
+
+static NSString *YTDMBrowseIdentifier(
+    UIViewController *controller) {
+
+    id endpoint =
+        YTDMHookedValue(controller,
+                        @"navigationEndpoint");
+
+    if (endpoint == nil) {
+        endpoint =
+            YTDMHookedValue(controller,
+                            @"navEndpoint");
+    }
+
+    if (endpoint == nil) {
+        @try {
+            endpoint =
+                [controller valueForKey:@"_navEndpoint"];
+        } @catch (__unused NSException *exception) {
+        }
+    }
+
+    id browseEndpoint =
+        YTDMHookedValue(endpoint,
+                        @"browseEndpoint");
+
+    if (browseEndpoint == nil &&
+        [endpoint respondsToSelector:
+            NSSelectorFromString(@"browseId")]) {
+        browseEndpoint = endpoint;
+    }
+
+    return YTDMHookedValue(browseEndpoint,
+                           @"browseId");
+}
+
+static void YTDMAttachDownloads(
+    UIViewController *controller) {
+
+    if (!YTDMDownloadsTabEnabled() ||
+        ![YTDMBrowseIdentifier(controller)
+            isEqualToString:YTDMPivotIdentifier] ||
+        objc_getAssociatedObject(
+            controller,
+            YTDMDownloadsAssociation) != nil) {
+        return;
+    }
+
+    YTDMDownloadsViewController *downloads =
+        [[YTDMDownloadsViewController alloc] init];
+
+    [controller addChildViewController:downloads];
+
+    downloads.view.frame =
+        controller.view.bounds;
+    downloads.view.autoresizingMask =
+        UIViewAutoresizingFlexibleWidth |
+        UIViewAutoresizingFlexibleHeight;
+
+    [controller.view addSubview:downloads.view];
+
+    [downloads didMoveToParentViewController:controller];
+
+    objc_setAssociatedObject(
+        controller,
+        YTDMDownloadsAssociation,
+        downloads,
+        OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+static void YTDMTryAttachDownloads(
+    UIViewController *controller) {
+
+    YTDMAttachDownloads(controller);
+
+    if (objc_getAssociatedObject(
+            controller,
+            YTDMDownloadsAssociation) == nil) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            YTDMAttachDownloads(controller);
+        });
+    }
+}
+
+static void YTDMPivotRendererSet(id receiver,
+                                 SEL selector,
+                                 id renderer) {
+
+    IMP previous = YTDMPreviousSetPivotRenderer;
+
+    if (renderer != nil &&
+        YTDMDownloadsTabEnabled()) {
+
+        NSString *setterName = nil;
+        NSArray *items =
+            YTDMTabItems(renderer,
+                         &setterName);
+
+        if (items != nil) {
+
+            NSMutableArray *filtered =
+                [items mutableCopy];
+
+            BOOL alreadyPresent = NO;
+
+            for (id item in filtered) {
+                NSString *identifier =
+                    YTDMHookedValue(
+                        YTDMHookedValue(
+                            item,
+                            @"pivotBarItemRenderer"),
+                        @"pivotIdentifier");
+                if ([identifier
+                        isEqualToString:
+                            YTDMPivotIdentifier]) {
+                    alreadyPresent = YES;
+                    break;
+                }
+            }
+
+            if (!alreadyPresent) {
+
+                id downloadItem =
+                    YTDMMakePivotItem();
+
+                if (downloadItem != nil) {
+
+                    [filtered addObject:downloadItem];
+
+                    SEL setter =
+                        NSSelectorFromString(setterName);
+
+                    if ([items
+                            isKindOfClass:
+                                NSMutableArray.class]) {
+                        [(NSMutableArray *)items
+                            setArray:filtered];
+                    } else if ([renderer
+                                   respondsToSelector:
+                                       setter]) {
+                        ((void (*)(id, SEL, id))
+                            objc_msgSend)(
+                                renderer,
+                                setter,
+                                filtered);
+                    }
+                }
+            }
+        }
+    }
+
+    if (previous != NULL) {
+        ((void (*)(id, SEL, id))previous)(
+            receiver,
+            selector,
+            renderer);
+    }
+}
+
+static void YTDMPivotControllerDidLoad(
+    id receiver,
+    SEL selector) {
+
+    Class cls = object_getClass(receiver);
+    NSValue *stored = cls == Nil
+        ? nil
+        : YTDMPreviousIMPs()[YTDMOriginalKey(cls, selector)];
+    IMP original = (IMP)[stored pointerValue];
+
+    if (original != NULL && original != (IMP)YTDMPivotControllerDidLoad) {
+        ((void (*)(id, SEL))original)(receiver, selector);
+    }
+
+    if ([receiver isKindOfClass:UIViewController.class]) {
+        YTDMTryAttachDownloads(
+            (UIViewController *)receiver);
+    }
+}
+
+// YTAppViewController and the browse wrappers host the content controller
+// that the pivot bar swaps in, so each one is a candidate landing point.
+__attribute__((constructor))
+static void YTDMDownloadsTabInit(void) {
+
+    id value =
+        [[NSUserDefaults standardUserDefaults]
+            objectForKey:
+                @"YTDM_ShowDownloadsTab"];
+
+    if (value == nil) {
+        [[NSUserDefaults standardUserDefaults]
+            setBool:YES
+            forKey:
+                @"YTDM_ShowDownloadsTab"];
+    }
+
+    Class pivotBarView =
+        NSClassFromString(@"YTPivotBarView");
+
+    SEL rendererSetter =
+        NSSelectorFromString(@"setRenderer:");
+
+    if (pivotBarView == Nil ||
+        ![pivotBarView
+            instancesRespondToSelector:
+                rendererSetter]) {
+        return;
+    }
+
+    YTDMInstallInstanceHook(pivotBarView,
+                            rendererSetter,
+                            (IMP)YTDMPivotRendererSet);
+
+    NSValue *rendererOriginal =
+        YTDMPreviousIMPs()[YTDMOriginalKey(pivotBarView, rendererSetter)];
+
+    if (rendererOriginal == nil) {
+        return;
+    }
+
+    YTDMPreviousSetPivotRenderer =
+        (IMP)[rendererOriginal pointerValue];
+
+    NSArray<NSString *> *hostClasses = @[
+        @"YTAppViewController",
+        @"YTBrowseViewController",
+        @"YTBrowseResponseViewController",
+        @"YTWrapperFlatViewController"
+    ];
+
+    for (NSString *className in hostClasses) {
+
+        Class hostClass =
+            NSClassFromString(className);
+
+        if (hostClass == Nil) {
+            continue;
+        }
+
+        YTDMInstallInstanceHook(
+            hostClass,
+            @selector(viewDidLoad),
+            (IMP)YTDMPivotControllerDidLoad);
+    }
+}
+
+
 
 %hook YTSingleVideo
 
@@ -5310,6 +5801,62 @@ static void YTDMConfigureOverlayButtons(UIView *view) {
                 @"Choose how to export your file:"
             preferredStyle:
                 UIAlertControllerStyleActionSheet];
+
+    if ([[NSUserDefaults standardUserDefaults]
+         boolForKey:@"YTDM_ShowDownloadsTab"]) {
+
+        [actionSheet
+            addAction:
+            [UIAlertAction
+                actionWithTitle:
+                    @"📥 Save to Downloads"
+                style:
+                    UIAlertActionStyleDefault
+                handler:
+                ^(UIAlertAction *a) {
+
+            [[YTDMProgressHUD sharedHUD]
+                showInView:
+                    getKeyWindow()];
+
+            [[YTDMDownloadsManager sharedManager]
+                saveDownloadedURLs:
+                    outURLs
+                isAudio:
+                    isAudio
+                quality:
+                    quality
+                title:
+                    nil
+                completion:
+                ^(BOOL success, NSError *error) {
+
+                dispatch_async(
+                    dispatch_get_main_queue(), ^{
+
+                    if (success) {
+
+                        [[YTDMProgressHUD sharedHUD]
+                            showSuccessWithStatus:
+                                @"Saved to Downloads!"];
+
+                    } else {
+
+                        NSString *msg =
+                            [NSString
+                                stringWithFormat:
+                                    @"Error: %@",
+                                    error.localizedDescription
+                                    ?: @"Unknown"];
+
+                        [[YTDMProgressHUD sharedHUD]
+                            showError:
+                                msg];
+                    }
+                });
+            }];
+        }]];
+    }
 
     if (!isAudio) {
 
