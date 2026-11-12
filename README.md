@@ -146,6 +146,7 @@ This tweak is developed by PoomSmart. This tweak is for viewing, changing and ad
 <details>
   <summary>YTDownloadManager</summary>
   YTDownloadManageer is a tweak made by me that has the role to temporarily replace the YTPlus download manager that is patched in the latest versions of Youtube. This tweak is enabled by default and has no settings at all. Now with 2k/4k/8k download capability. Now with an dedicated downloads tab. An independent repo link for it may follow...
+</details>
 
 <details>
   <summary>YTFlags</summary>
