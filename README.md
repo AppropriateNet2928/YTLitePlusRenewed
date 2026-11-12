@@ -74,6 +74,11 @@ This tweak is developed by PoomSmart. This tweak enables native PiP to the Youtu
 </details>
 
 <details>
+  <summary>Cercube 6.5.0 (YTLPRLoader)</summary>
+  Cercube is a successor of the old Cercube tweak which includes some useful enhancements and some kind of cache downloading. To load it up go to the TweakLoader settings page, turn Cercube ON and in the popup u can either press restart now or Later if u also want to enable other tweaks, if u enabled second tweak turn it on and tap restart now on the popup or the button "Restart YouTube" (or how it's named there) in the settings page to restart yt.
+</details>
+
+<details>
   <summary>VolumeBoostYT</summary>
   VolumeBoostYT was originally made by @irum0320, but in this mod there is the updated, advanced and fixed fork by @candyzp. This tweak does the same thing that the og one does: Making the volume go high, high and high than the native iIOS could give. This repo is new and some stars and forks would rally make the dev happy, plus, he deserves them: https://github.com/candyzp/VolumeBoostYT
 </details>
