@@ -4,9 +4,23 @@ A very nice iOS Youtube tweak, that brings many useful youtube tweaks to the You
 
 It was very hard to build, but I do all this work for everyone!
 
+**And more importantly...:**
+
+My work is FREE and will ALWAYS be free. I built this with ❤️ and passion for every single user.
+
+Please make a github issue if you encounter any kind of issue within using my tweak!
+
 > [!NOTE]
->WHEN U FIRST OPEN THE MOD RESTART IT RIGHT AWAY SO IT SHOWS THE RIGHT UI, WHEN U FIRST LAUNCH IT IT SHOWS THE OLD YT UI. THIS ACTION MUST BE DONE ONLY ONCE!
+**When u first open the mod, please restart it right away, so the new UI can load instead of the old one. This action has to be done only ONCE!**
 >
+# Socials
+
+U can find the mod/info about the mod etc on the following places:
+
+- My telegram group chat (I'd love people to join it btw): https://t.me/YTLitePlusRenewed_Official;
+- My reddit community:  https://www.reddit.com/r/YTLitePlusRenewed;
+
+These are the only official places (for now) where you can find the mod and engage etc.
 # Implemented tweaks:
 <details>
   <summary>A/B</summary>
@@ -44,24 +58,19 @@ This tweak is developed by PoomSmart. This tweak enables native PiP to the Youtu
 </details>
 
 <details>
-  <summary>YTLIte 5.2.2 crack</summary>
-  The YTLite 5.2.2 crack is cracked by Zarzel (shinewake).YTLite is made by dayanch96, eaturing over 100+ customization options.
+  <summary>YTLIte 6.0 (cracked)</summary>
+  The YTLite 5.2.2 crack is cracked by Spy_G (I think). YTLite is made by dayanch96, eaturing over 100+ customization options.
 </details>
 
 
 <details>
-  <summary>YTKACE v0.9.3</summary>
+  <summary>YTKACE v1.1.7</summary>
   YTKACE v0.9.3 is developed by @itzzace and it is a very popular tweak meant to be, in fact, a curated FREE replica of YTKillerPlus. This tweak is not affiliated in any way with YTKillerPlus. Moreover, it has a rich amount of features and whatnot! Please fork & star his repo, he deserves it: https://github.com/itzzace/ytkace.
-
->
-> **IMPORTANT**:
-> This tweak has **two** sections in Youtube Settings that both open the same tweak: Youtube Plus. Please open YTKACE settings by tapping the YTKACE downloads library and then the gear in the immediate upper right corner.
->
 </details>
 
 <details>
-  <summary>YouMod v2.0.0</summary>
-  YouMod v2.0.0 is a tweak developed & maintained by @TonWalter888. This is also a mod that has similar features to Youtube Plus (cracked v5.2.2) **and** ytkace. This is also very popular among the community. It has lots of features, a download manager, Sponsorblock and still counting! Please give him a star and fork his repo to support this wonderful dev! He deserves every star, fork and praise (my opinion): https://github.com/Tonwalter888/YouMod
+  <summary>YouMod v2.0.0 (YTLPRLoader)</summary>
+  YouMod v2.0.0 is a tweak developed & maintained by @TonWalter888. This is also a mod that has similar features to Youtube Plus (cracked v5.2.2) **and** ytkace. This is also very popular among the community. It has lots of features, a download manager, Sponsorblock and still counting! Please give him a star and fork his repo to support this wonderful dev! He deserves every star, fork and praise (my opinion): https://github.com/Tonwalter888/YouMod (integrated in YTLPRLoader, in its settings, aka in TweakLoader u can choose the tweak to load not up or disable it)
 </details>
 
 <details>
@@ -71,7 +80,7 @@ This tweak is developed by PoomSmart. This tweak enables native PiP to the Youtu
 
 <details>
   <summary>YTLitePlusRenewed</summary>
-  Yes, this tweak is intentionally named after this whole mod because it is meant to give features that boost your Youtube experience! It brings just YTLocalQueueReborn, an updated and simplified features of what used to be YTLocalQueue and Flappy Bird: a feature that is meant to.....use it as an entertainment reason, meaning that u can just play this for as long as u want. Plus it has 5 custom themes. More features coming soon....
+  Yes, this tweak is intentionally named after this whole mod because it is meant to give features that boost your Youtube experience! It brings just YTLocalQueueReborn, an updated and simplified features of what used to be YTLocalQueue and Flappy Bird: a feature that is meant to.....use it as an entertainment reason, meaning that u can just play this for as long as u want. Plus it has 5 custom themes. It now also has YouHideUserInterface imported and some more features. More features coming soon....
 </details>
 
 <details>
@@ -120,21 +129,6 @@ This tweak is developed by PoomSmart. This tweak is for viewing, changing and ad
 </details>
 
 <details>
-  <summary>YouLoop</summary>
-  This tweak is developed by bhackel. This tweak is for looping Youtube videos.
-</details>
-
-<details>
-  <summary>YouMute</summary>
-  This tweak is developed by PoomSmart. This tweak is for muting/unmuting Youtube videos faster.
-</details>
-
-<details>
-  <summary>YouHideUserInterface</summary>
-  This us a tweak created by me that has the role to hide/unhide the User Interface in both shorts and Video Overlay for a cleaner UI. Especially useful on video overlay! This tweak is enabled by default. It has a settings page and a Visibility slider to adjust the visibility of the icon in both videos and Shorts. By default, the value of the slider is set to the lowest value (1), to ensure that the eye icon isn't that disturbing for ppl.
-</details>
-
-<details>
   <summary>YouFixPlaybackIssues</summary>
   This is a tweak created by me that has the key role of fixing the playback issues that, in my opinion, is the best fix at the current hour! This fix outperforms many older fixes like, for instance, it outperforms iKarwan's fix in YTKillerPlus. This tweak is enabled by default and has no settings at all. This also has an EXPERIMENTAL PoToken bypass. May work, may not, YMMV.
 </details>
@@ -145,23 +139,13 @@ This tweak is developed by PoomSmart. This tweak is for viewing, changing and ad
 </details>
 
 <details>
-  <summary>LowContrastMode</summary>
-  LowContrastMode is a remake of the original tweak made by arichornlover that makes the YT interface as low contrast as possible and easier on the eyes. More info can be found at the tweak's repo: https://github.com/Mark02-2012/YTLowContrastMode.
-</details>
-
-<details>
   <summary>NoYTPremium</summary>
   NoYTPremium is a tweak made by PoomSmart and it has the role to remove ads that are promoting Youtube Premium. More info can be found at the tweak's repo: https://github.com/PoomSmart/NoYTPremium
 </details>
 
 <details>
   <summary>YTDownloadManager</summary>
-  YTDownloadManageer is a tweak made by me that has the role to temporarily replace the YTPlus download manager that is patched in the latest versions of Youtube. This tweak is enabled by default and has no settings at all. Now with 2k/4k/8k download capability. An independent repo link for it will follow...
-
->
-> The server link is **UPDATED**. The old GoPort link doesn't work due go the GoPort devs making custom subdomains a paid thing now. Please use the following updated link: https://5volue.goport.uz. Sorry!!!
->
-</details>
+  YTDownloadManageer is a tweak made by me that has the role to temporarily replace the YTPlus download manager that is patched in the latest versions of Youtube. This tweak is enabled by default and has no settings at all. Now with 2k/4k/8k download capability. Now with an dedicated downloads tab. An independent repo link for it may follow...
 
 <details>
   <summary>YTFlags</summary>
@@ -186,29 +170,16 @@ This mod can't be installed using SideStore and it's not my fault.
 
 * Fixing whatever other issues might come down the road!
 
-# Important things:
-
-THIS TWEAK WILL ALWAYS BE FREE! I'LL NEVER LOCK IT BEHIND A PAYWALL LIKE dayanch96 DID.
-
-My work is FREE. I built this with ❤️ and passion for people to use it with pure trust! I don't need any contribution from anyone! Just the fact that you are using my Youtube tweak and you are happy is more than enough for me.
-
-Please make a github issue if you encounter any kind of issue within using my tweak!
-
-
 # Special Thanks
 
 Special thanks to PoomSmart, dayanch96 and all the devs who created the tweaks i have already implemented and will implement!
 
-Special thanks to daisuke1227 for the download manager!
-
-Special thanks to Mark02-2012 for LowContrastMode!
+Special thanks to Mark02-2012 for LowContrastMode code!
 
 Special thanks to @Tonwalter888 for helping me with YouFixPlaybackIssues and YTFlags, and YouMod!
 
-Special thanks to @itzzace for YTKACE v0.9.3!
+Special thanks to @itzzace for YTKACE v1.1.7, YTLPRLoader!
 
-Special thanks to @candyzp for VolumeVoostYT
+Special thanks to @candyzp for VolumeVoostYT!
 
 Special thanks to @tywtyw2002 for the experimental PoToken fix idea and logic!
-
-
