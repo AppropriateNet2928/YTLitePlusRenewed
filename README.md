@@ -176,6 +176,8 @@ This mod can't be installed using SideStore and it's not my fault.
 
 * Fixing whatever other issues might come down the road!
 
+* Fixing issues with the Downloads tab as per said in v1.6 release.
+
 # Special Thanks
 
 Special thanks to PoomSmart, dayanch96 and all the devs who created the tweaks i have already implemented and will implement!
